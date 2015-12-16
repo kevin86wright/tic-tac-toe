@@ -45,7 +45,7 @@ def explain_board():
 	input("\nPress Enter to continue...")
 
 def who_goes_first():
-	random_num = random.randint(1, 1)
+	random_num = random.randint(0, 1)
 	if random_num == 0:
 		return "Player"
 	else:
