@@ -52,7 +52,8 @@ def who_goes_first():
 		return "Computer"
 
 def player_go(open_moves, board):
-	clear_screen()
+	#clear_screen()
+	print("\n")
 	draw_board(board)
 	choice = ""
 	while choice not in open_moves:
@@ -65,9 +66,23 @@ def player_go(open_moves, board):
 			choice = int(choice)
 	return choice
 
-def computer_go(open_moves):
-	choice = random.choice(open_moves)
-	return choice
+def computer_go(open_moves, board, computer_letter):
+	copy_of_board = board
+	#winning_move = 0
+	for move in open_moves:
+		copy_of_board[move] = computer_letter
+		if check_if_winner(copy_of_board) == True:
+			winning_move = move
+		else:
+			copy_of_board[move] = ' '
+			winning_move = 0
+	#winning_move = move
+	if winning_move != 0:
+		return winning_move
+	else:
+		return random.choice(open_moves)
+
+
 
 def check_if_winner(board):
 	# horizontal
@@ -112,11 +127,12 @@ while True:
 			board[player_choice] = player_letter
 			if check_if_winner(board):
 				print("\nYou won the game! Congratulations!\n")
+				draw_board(board)
 				break
 			turn = 'Computer' # This is ending the Player's turn
 		else: # Computer's Turn
-			computer_choice = computer_go(open_moves)
-			print("Computer moved and selected " + str(computer_choice))
+			computer_choice = computer_go(open_moves, board, computer_letter)
+			#print("Computer moved and selected " + str(computer_choice))
 			open_moves.remove(computer_choice)
 			board[computer_choice] = computer_letter
 			draw_board(board)
