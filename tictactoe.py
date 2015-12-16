@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from operator import itemgetter 
+from operator import itemgetter
 import random
 
 def clear_screen():
@@ -52,12 +52,12 @@ def who_goes_first():
 		return "Computer"
 
 def player_go(open_moves, board):
-	#clear_screen()
+	clear_screen()
 	print("\n")
 	draw_board(board)
 	choice = ""
 	while choice not in open_moves:
-		choice = input("Please choose a square: ")
+		choice = input("\nPlease choose a square: ")
 		try:
 			int(choice)
 		except ValueError:
@@ -68,7 +68,6 @@ def player_go(open_moves, board):
 
 def computer_go(open_moves, board, computer_letter):
 	copy_of_board = board
-	#winning_move = 0
 	for move in open_moves:
 		copy_of_board[move] = computer_letter
 		if check_if_winner(copy_of_board) == True:
@@ -76,7 +75,6 @@ def computer_go(open_moves, board, computer_letter):
 		else:
 			copy_of_board[move] = ' '
 			winning_move = 0
-	#winning_move = move
 	if winning_move != 0:
 		return winning_move
 	else:
@@ -107,6 +105,8 @@ def check_if_winner(board):
 	else:
 		return False
 
+
+
 while True:
 	open_moves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 	board = [' '] * 10
@@ -132,7 +132,6 @@ while True:
 			turn = 'Computer' # This is ending the Player's turn
 		else: # Computer's Turn
 			computer_choice = computer_go(open_moves, board, computer_letter)
-			#print("Computer moved and selected " + str(computer_choice))
 			open_moves.remove(computer_choice)
 			board[computer_choice] = computer_letter
 			draw_board(board)
